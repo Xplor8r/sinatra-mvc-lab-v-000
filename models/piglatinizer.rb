@@ -10,7 +10,7 @@ attr_reader :text
     vowels = ['a', 'e', 'i', 'o', 'u']
     words = sent.split(' ')
     result = []
-  
+
     words.each_with_index do |word, i|
       translation = ''
       qu = false
