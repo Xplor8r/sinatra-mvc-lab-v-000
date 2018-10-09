@@ -5,7 +5,7 @@ attr_reader :text
     @text = text
   end
 
-  def translate
+  def piglatinize
 
     vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
     words = text.split(' ')
