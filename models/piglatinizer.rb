@@ -1,32 +1,53 @@
 class PigLatinizer
+attr_reader :text
 
-  def piglatinize(input_str)
-    x = (input_str.split(" ").length == 1) ? piglatinize_word(input_str) : piglatinize_sentence(input_str)
-    puts x
-    x
-  end
-  private
-
-  def consonant?(char)
-    !char.match(/[aAeEiIoOuU]/)
+  def initialize(text)
+    @text = text
   end
 
-  def piglatinize_word(word)
-    if !consonant?(word[0])
-      word = word + "w"
-    elsif consonant?(word[0]) && consonant?(word[1]) && consonant?(word[2])
-      word = word.slice(3..-1) + word.slice(0,3)
+  def translate
 
-    elsif consonant?(word[0]) && consonant?(word[1])
-      word = word.slice(2..-1) + word.slice(0,2)
+    vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+    words = text.split(' ')
+    result = []
 
-    else
-      word = word.slice(1..-1) + word.slice(0)
+    words.each_with_index do |word, i|
+      translation = ''
+      qu = false
+      if vowels.include? word[0]
+        translation = word + 'ay'
+        result.push(translation)
+      else
+        word = word.split('')
+        count = 0
+        word.each_with_index do |char, index|
+          if vowels.include? char
+              if char == 'u' and translation[-1] == 'q'
+                qu = true
+                translation = words[i][count + 1..words[i].length] + translation + 'uay'
+                result.push(translation)
+                next
+              end
+                break
+          else
+
+            if char == 'q' and word[i+1] == 'u'
+              qu = true
+              translation = words[i][count + 2..words[i].length] + 'quay'
+              result.push(translation)
+              next
+            else
+              translation += char
+            end
+            count += 1
+          end
+        end
+        if not qu
+          translation = words[i][count..words[i].length] + translation + 'ay'
+          result.push(translation)
+        end
+      end
     end
-    word << "ay"
-  end
-
-  def piglatinize_sentence(sentence)
-    sentence.split.collect { |word| piglatinize_word(word) }.join(" ")
+    result.join(' ')
   end
 end
