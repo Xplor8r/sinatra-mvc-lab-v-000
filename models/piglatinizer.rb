@@ -15,7 +15,7 @@ attr_reader :text
       translation = ''
       qu = false
       if vowels.include? word[0]
-        translation = word + 'ay'
+        translation = word + 'way'
         result.push(translation)
       else
         word = word.split('')
