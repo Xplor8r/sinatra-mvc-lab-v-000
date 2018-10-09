@@ -6,7 +6,6 @@ attr_reader :text
   end
 
   def translate
-
     vowels = ['a', 'e', 'i', 'o', 'u']
     words = text.split(' ')
     result = []
