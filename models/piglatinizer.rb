@@ -5,10 +5,10 @@ attr_reader :text
     @text = text.downcase
   end
 
-  def translate(sent)
-    sent = sent.downcase
+  def translate
+
     vowels = ['a', 'e', 'i', 'o', 'u']
-    words = sent.split(' ')
+    words = text.split(' ')
     result = []
 
     words.each_with_index do |word, i|
