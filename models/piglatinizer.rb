@@ -1,11 +1,9 @@
 class PigLatinizer
 attr_reader :text
 
-  def initialize(text)
-    @text = text
-  end
 
-  def piglatinize
+
+  def piglatinize(text)
 
     vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
     words = text.split(' ')
